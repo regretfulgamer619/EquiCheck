@@ -5,7 +5,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("https://www.shutterstock.com/image-vector/bullish-candlestick-graph-chart-stock-260nw-2169680589.jpg");
+        background-image: url("https://github.com/regretfulgamer619/EquiCheck/blob/main/bg.png");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
