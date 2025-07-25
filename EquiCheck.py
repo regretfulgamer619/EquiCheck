@@ -6,7 +6,7 @@ st.set_page_config(page_title="EquiCheck", layout="wide")
 st.markdown(
     """
     <h1 style='text-align: center;'> EquiCheck </h1>
-    <h5 style='text-align: center;'> Here is an early birthday gift for you </h5>
+    <h5 style='text-align: center;'> Here is an early birthday gift for you Papa </h5>
     <h5 style='text-align: center;'> A simple app to compare your stock holdings! </h5> 
     <p style='text-align: center;'> Upload the excel sheets with old week and new week holdings and it'll verify mismatches in your stock quantities. </p>
     """,
