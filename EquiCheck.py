@@ -13,6 +13,17 @@ st.markdown(
     unsafe_allow_html=True
 )
 st.markdown("<hr>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: #000000; /* Dark gray or black */
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 file1 = st.file_uploader("Upload old week excel sheet", type="xlsx")
 file2 = st.file_uploader("Upload new week excel sheet", type="xlsx")
 
