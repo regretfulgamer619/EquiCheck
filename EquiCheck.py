@@ -32,7 +32,7 @@ if file1 and file2:
                        "Total Holding (new week)":totalholding2["Total Holding"]})
         compared["Total Holding (old week)"]=pd.to_numeric(compared["Total Holding (old week)"],errors="coerce")
         compared["Total Holding (new week)"]=pd.to_numeric(compared["Total Holding (new week)"],errors="coerce")
-        compared["Difference"]= compared["Total Holding (old week)"] - compared["Total Holding (new week)"]
+        compared["Difference"]= compared["Total Holding (new week)"]-compared["Total Holding (old week)"] 
         # compared=compared.drop(index=62)
         mismatches=compared[compared["Difference"]!=0]
         if mismatches.empty:
