@@ -1,19 +1,7 @@
 import streamlit as st
 import pandas as pd
 st.set_page_config(page_title="EquiCheck", layout="wide")
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: url("https://wallpapercg.com/media/ts_orig/19476.webp");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+
 
 st.markdown(
     """
