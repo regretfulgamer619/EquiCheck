@@ -1,6 +1,6 @@
-# 🎈 Blank app template
+# EquiCheck
 
-A simple Streamlit app template for you to modify!
+A simple app for you to comapare your holdings!
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
