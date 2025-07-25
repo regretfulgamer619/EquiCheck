@@ -1,38 +1,6 @@
 import streamlit as st
 import pandas as pd
 st.set_page_config(page_title="EquiCheck", layout="wide")
-st.markdown(
-    """
-    <style>
-    /* Main app background */
-    .stApp {
-        background-color: #000000;
-        color: white;
-    }
-
-    /* Top header (main block area) */
-    header[data-testid="stHeader"] {
-        background-color: #000000;
-    }
-
-    /* Sidebar */
-    [data-testid="stSidebar"] {
-        background-color: #000000;
-    }
-
-    /* Hide the default hamburger menu bar shadow */
-    header[data-testid="stHeader"]::before {
-        content: none;
-    }
-
-    /* Remove gray border above header */
-    .block-container {
-        padding-top: 1rem;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 st.markdown(
     """
