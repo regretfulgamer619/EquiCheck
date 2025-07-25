@@ -5,7 +5,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("https://as1.ftcdn.net/jpg/07/81/55/96/1000_F_781559642_PY8u3f0n5yJKxkhLTfcwNXGCMzSlBKVv.jpg");
+        background-image: url("https://media.istockphoto.com/id/1584774403/photo/uptrend-line-candlestick-graph-financial-diagrams.jpg?s=612x612&w=0&k=20&c=gLckUiRgsYy551JbGcdnloKYCDMrh6pgLrK1-xk-qTs=");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
