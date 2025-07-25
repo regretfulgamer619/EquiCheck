@@ -5,7 +5,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("https://github.com/regretfulgamer619/EquiCheck/blob/main/bg.png");
+        background-image: url("https://raw.githubusercontent.com/regretfulgamer619/EquiCheck/main/bg.png");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
