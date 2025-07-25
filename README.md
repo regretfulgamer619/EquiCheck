@@ -1,6 +1,6 @@
 # EquiCheck
 
-A simple app for you to comapare your holdings!
+A simple app for you to comapare your stock holdings!
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
