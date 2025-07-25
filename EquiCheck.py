@@ -1,7 +1,38 @@
 import streamlit as st
 import pandas as pd
 st.set_page_config(page_title="EquiCheck", layout="wide")
+st.markdown(
+    """
+    <style>
+    /* Main app background */
+    .stApp {
+        background-color: #000000;
+        color: white;
+    }
 
+    /* Top header (main block area) */
+    header[data-testid="stHeader"] {
+        background-color: #000000;
+    }
+
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background-color: #000000;
+    }
+
+    /* Hide the default hamburger menu bar shadow */
+    header[data-testid="stHeader"]::before {
+        content: none;
+    }
+
+    /* Remove gray border above header */
+    .block-container {
+        padding-top: 1rem;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 st.markdown(
     """
@@ -10,19 +41,8 @@ st.markdown(
     <h6 style='text-align: center;'> A simple app to compare your stock holdings! </h6> 
     <p style='text-align: center;'> Upload the excel sheets with old week and new week holdings and it'll verify the mismatches in your stock quantities. </p>
     """,
-    unsafe_allow_html=True
-)
-st.markdown("<hr>", unsafe_allow_html=True)
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-color: #000000; /* Dark gray or black */
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+    unsafe_allow_html=True)
+
 
 file1 = st.file_uploader("Upload old week excel sheet", type="xlsx")
 file2 = st.file_uploader("Upload new week excel sheet", type="xlsx")
