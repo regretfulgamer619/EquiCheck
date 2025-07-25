@@ -6,8 +6,8 @@ st.set_page_config(page_title="EquiCheck", layout="wide")
 st.markdown(
     """
     <h1 style='text-align: center;'> EquiCheck </h1>
-    <p style='text-align: center;'> A simple app for you to comapare your holdings! </p>
-    <p style='text-align: center;'>Upload the excel sheets with old week and new week holdings and it'll verify mismatches in your stock quantities </p>
+    <h3 style='text-align: center;'> Here is an early birthday gift for you. A simple app to compare your stock holdings! </h3>
+    <p style='text-align: center;'> Upload the excel sheets with old week and new week holdings and it'll verify mismatches in your stock quantities. </p>
     """,
     unsafe_allow_html=True
 )
