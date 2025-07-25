@@ -12,8 +12,6 @@ st.markdown(
 st.markdown("<hr>", unsafe_allow_html=True)
 file1 = st.file_uploader("Upload old week excel sheet", type="xlsx")
 file2 = st.file_uploader("Upload new week excel sheet", type="xlsx")
-st.write("Data preview:")
-st.dataframe(file1.head(100))
 
 if file1 and file2:
     try:
