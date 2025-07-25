@@ -13,24 +13,29 @@ st.markdown("<hr>", unsafe_allow_html=True)
 file1 = st.file_uploader("Upload old week excel sheet", type="xlsx")
 file2 = st.file_uploader("Upload new week excel sheet", type="xlsx")
 
+def file_cleaner(file):
+    data=pd.read_excel(file,header=None)
+    for i, row in data.iterrows():
+        if "Scrip Name" in row.values and "Total Holding" in row.values and "ScripCode" in row.values:
+            index=i
+            break
+    else :
+        raise ValueError("No such column names found")
+    data.columns= data.iloc[index]
+    data = data.drop(index=range(index + 1)).reset_index(drop=True)
+    data = data[:-2]
+    cleaned_data= data[["ScripCode","Scrip Name","Total Holding"]]
+    return cleaned_data
+
 if file1 and file2:
     try:
-        data_1= pd.read_excel(file1,header=None)
-        data_2=pd.read_excel(file2, header=None)
+        totalholding1= file_cleaner(file1)
+        totalholding2= file_cleaner(file2)
         
-        data_1.columns=data_1.iloc[2]
-        data_1=data_1.drop(data_1.index[[0,1,2]]).reset_index(drop=True)
-        totalholding1=data_1[["ScripCode","Scrip Name","Total Holding"]]
-        totalholding1 = totalholding1.drop(totalholding1.index[[-1,-2]])
-       
-        data_2.columns=data_2.iloc[2]
-        data_2=data_2.drop(data_2.index[[0,1,2]]).reset_index(drop=True)
-        totalholding2=data_2[["ScripCode","Scrip Name","Total Holding"]]
-        totalholding2=totalholding2.drop(totalholding2.index[[-1,-2]])
         compared=pd.DataFrame({"ScripCode":totalholding1["ScripCode"],
-                       "Scrip Name":totalholding1["Scrip Name"],
-                       "Total Holding (old week)":totalholding1["Total Holding"],
-                       "Total Holding (new week)":totalholding2["Total Holding"]})
+                               "Scrip Name":totalholding1["Scrip Name"],
+                               "Total Holding (old week)":totalholding1["Total Holding"],
+                               "Total Holding (new week)":totalholding2["Total Holding"]})
         compared["Total Holding (old week)"]=pd.to_numeric(compared["Total Holding (old week)"],errors="coerce")
         compared["Total Holding (new week)"]=pd.to_numeric(compared["Total Holding (new week)"],errors="coerce")
         compared["Difference"]= compared["Total Holding (new week)"]-compared["Total Holding (old week)"] 
