@@ -5,7 +5,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("https://img.freepik.com/free-vector/gradient-stock-market-concept_23-2149166910.jpg");
+        background-image: url("https://t3.ftcdn.net/jpg/02/74/91/02/360_F_274910292_Xm3dgmmfMJVFrcjUR1eqJmIC7giRrsTF.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
