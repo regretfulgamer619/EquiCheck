@@ -5,7 +5,7 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("https://www.shutterstock.com/image-vector/cryptocurrency-trading-financial-market-candles-600nw-2417181577.jpg");
+        background-image: url("https://as1.ftcdn.net/jpg/07/81/55/96/1000_F_781559642_PY8u3f0n5yJKxkhLTfcwNXGCMzSlBKVv.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
