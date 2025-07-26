@@ -39,8 +39,8 @@ if file1 and file2:
                                "Total Holding (old week)":totalholding1["Total Holding"],
                                "Total Holding (new week)":totalholding2["Total Holding"]})
         compared = pd.merge(totalholding1, totalholding2, on="ScripCode", how="outer")
-        compared["Scrip Name"] = compared["Scrip Name_old"].combine_first(compared["Scrip Name_new"])
-        compared = compared.drop(columns=["Scrip Name_old", "Scrip Name_new"])
+        # compared["Scrip Name"] = compared["Scrip Name_old"].combine_first(compared["Scrip Name_new"])
+        # compared = compared.drop(columns=["Scrip Name_old", "Scrip Name_new"])
         compared["Total Holding (old week)"]=pd.to_numeric(compared["Total Holding (old week)"],errors="coerce")
         compared["Total Holding (new week)"]=pd.to_numeric(compared["Total Holding (new week)"],errors="coerce")
         compared["Difference"]= compared["Total Holding (new week)"]-compared["Total Holding (old week)"] 
@@ -50,11 +50,11 @@ if file1 and file2:
             old = row["Total Holding (old week)"]
             new = row["Total Holding (new week)"]
             if old == 0 and new > 0:
-                status.append(" Newly Bought")
+                status.append("Newly Bought")
             elif old > 0 and new == 0:
-                status.append(" Fully Sold")
+                status.append("Fully Sold")
             elif old != new:
-                status.append(" Quantity Changed")
+                status.append("Quantity Changed")
             else:
                 status.append("") 
 
