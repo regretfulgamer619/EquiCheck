@@ -60,7 +60,7 @@ if file1 and file2:
 
         totalholding1= file_cleaner(file1).copy()
         totalholding2= file_cleaner(file2).copy()
-         if totalholding1.shape > totalholding2.shape:
+        if totalholding1.shape > totalholding2.shape:
             for _, row in totalholding1.iterrows():
                  code = row["ScripCode"]
                  if code not in totalholding2["Scrip Name"].values:
