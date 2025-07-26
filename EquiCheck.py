@@ -65,7 +65,7 @@ if file1 and file2:
             elif old > 0 and new == 0:
                 status.append("Sold Entirely")
             elif old != new:
-                status.append("Quantity Changed")
+                status.append("Traded")
             else:
                 status.append("") 
 
