@@ -18,7 +18,7 @@ file2 = st.file_uploader("Upload new week excel sheet", type="xlsx")
 def file_cleaner(file):
     data=pd.read_excel(file,header=None)
     for i, row in data.iterrows():
-        if "Scrip Name" in row.values and "Total Holding" in row.values and "ScripCode" in row.values:
+        if "Scrip Name" in row.values and "Total Holding" in row.values:
             index=i
             break
     else :
