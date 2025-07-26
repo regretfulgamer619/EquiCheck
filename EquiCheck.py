@@ -71,7 +71,7 @@ if file1 and file2:
             for _, row in totalholding2.iterrows():
                  code = row["ScripCode"]
                  if code not in totalholding1["Scrip Name"].values:
-                     totalholding1.=pd.concat([totalholding1, pd.DataFrame([{"ScripCode": code,["Scrip Name"]:row["Scrip Name"],"Total Holding": 0}])],ignore_index=False)
+                     totalholding1 = pd.concat([totalholding1, pd.DataFrame([{"ScripCode": code,["Scrip Name"]:row["Scrip Name"],"Total Holding": 0}])],ignore_index=False)
         totalholding1= totalholding1.sort_values(by="ScripCode").reset_index(drop=True)
         totalholding2= totalholding2.sort_values(by="ScripCode").reset_index(drop=True)
         
