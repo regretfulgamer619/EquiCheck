@@ -32,70 +32,73 @@ def file_cleaner(file):
 if file1 and file2:
     try:
               # Clean both files
-        totalholding1 = file_cleaner(file1)
-        totalholding2 = file_cleaner(file2)
+#         totalholding1 = file_cleaner(file1)
+#         totalholding2 = file_cleaner(file2)
 
-# Convert Total Holding to numeric
-        totalholding1["Total Holding"] = pd.to_numeric(totalholding1["Total Holding"], errors="coerce")
-        totalholding2["Total Holding"] = pd.to_numeric(totalholding2["Total Holding"], errors="coerce")
+# # Convert Total Holding to numeric
+#         totalholding1["Total Holding"] = pd.to_numeric(totalholding1["Total Holding"], errors="coerce")
+#         totalholding2["Total Holding"] = pd.to_numeric(totalholding2["Total Holding"], errors="coerce")
 
-# Merge on ScripCode with outer join to include all stocks from both
-        compared = pd.merge(
-                totalholding1[["ScripCode", "Scrip Name", "Total Holding"]].rename(columns={"Total Holding": "Total Holding (old week)"}),
-                totalholding2[["ScripCode", "Scrip Name", "Total Holding"]].rename(columns={"Total Holding": "Total Holding (new week)"}),on="ScripCode",how="outer",suffixes=("_old", "_new") )
+# # Merge on ScripCode with outer join to include all stocks from both
+#         compared = pd.merge(
+#                 totalholding1[["ScripCode", "Scrip Name", "Total Holding"]].rename(columns={"Total Holding": "Total Holding (old week)"}),
+#                 totalholding2[["ScripCode", "Scrip Name", "Total Holding"]].rename(columns={"Total Holding": "Total Holding (new week)"}),on="ScripCode",how="outer",suffixes=("_old", "_new") )
 
-# Fill missing values (NaN) with 0 — meaning stock was bought new or sold off completely
-        compared["Total Holding (old week)"] = compared["Total Holding (old week)"].fillna(0)
-        compared["Total Holding (new week)"] = compared["Total Holding (new week)"].fillna(0)
+# # Fill missing values (NaN) with 0 — meaning stock was bought new or sold off completely
+#         compared["Total Holding (old week)"] = compared["Total Holding (old week)"].fillna(0)
+#         compared["Total Holding (new week)"] = compared["Total Holding (new week)"].fillna(0)
 
-# Prefer non-null Scrip Name
-        compared["Scrip Name"] = compared["Scrip Name_old"].combine_first(compared["Scrip Name_new"])
-        compared = compared.drop(columns=["Scrip Name_old", "Scrip Name_new"])
+# # Prefer non-null Scrip Name
+#         compared["Scrip Name"] = compared["Scrip Name_old"].combine_first(compared["Scrip Name_new"])
+#         compared = compared.drop(columns=["Scrip Name_old", "Scrip Name_new"])
 
-# Calculate difference
-        compared["Difference"] = compared["Total Holding (new week)"] - compared["Total Holding (old week)"]
+# # Calculate difference
+#         compared["Difference"] = compared["Total Holding (new week)"] - compared["Total Holding (old week)"]
 
-# Filter mismatches
-        mismatches = compared[compared["Difference"] != 0]
+# # Filter mismatches
+#         mismatches = compared[compared["Difference"] != 0]
 
-        # totalholding1= file_cleaner(file1).copy()
-        # totalholding2= file_cleaner(file2).copy()
-        #  if totalholding1.shape > totalholding2.shape:
-        #     for index, row in totalholding1.iterrows():
-        #          code = row["ScripCode"]
-        #          if code not in totalholding2["ScripCode"].values:
-        #              totalholding2.loc[index] = { code, row["Scrip Name"],0 }
+        totalholding1= file_cleaner(file1).copy()
+        totalholding2= file_cleaner(file2).copy()
+         if totalholding1.shape > totalholding2.shape:
+            for _, row in totalholding1.iterrows():
+                 code = row["ScripCode"]
+                 if code not in totalholding2["Scrip Name"].values:
+                     totalholding2 = pd.concat([totalholding2, pd.DataFrame([{"ScripCode": code,"Scrip Name": row["Scrip Name"],"Total Holding": 0 }])], ignore_index=False)
 
-        # elif totalholding2.shape> totalholding1.shape:
-        #     for index, row in totalholding2.iterrows():
-        #          code = row["ScripCode"]
-        #          if code not in totalholding1["Scrip Name"].values:
-        #              totalholding1.loc[index]={ code,row["Scrip Name"],0}
+
+        elif totalholding2.shape> totalholding1.shape:
+            for _, row in totalholding2.iterrows():
+                 code = row["ScripCode"]
+                 if code not in totalholding1["Scrip Name"].values:
+                     totalholding1.=pd.concat([totalholding1, pd.DataFrame([{"ScripCode": code,["Scrip Name"]:row["Scrip Name"],"Total Holding": 0}])],ignore_index=False)
+        totalholding1= totalholding1.sort_values(by="ScripCode").reset_index(drop=True)
+        totalholding2= totalholding2.sort_values(by="ScripCode").reset_index(drop=True)
         
-        # compared=pd.DataFrame({"ScripCode":totalholding1["ScripCode"],
-        #                        "Scrip Name":totalholding1["Scrip Name"],
-        #                        "Total Holding (old week)":totalholding1["Total Holding"],
-        #                        "Total Holding (new week)":totalholding2["Total Holding"]})
-        # compared["Total Holding (old week)"]=pd.to_numeric(compared["Total Holding (old week)"],errors="coerce")
-        # compared["Total Holding (new week)"]=pd.to_numeric(compared["Total Holding (new week)"],errors="coerce")
-        # compared["Difference"]= compared["Total Holding (new week)"]-compared["Total Holding (old week)"] 
+        compared=pd.DataFrame({"ScripCode":totalholding1["ScripCode"],
+                               "Scrip Name":totalholding1["Scrip Name"],
+                               "Total Holding (old week)":totalholding1["Total Holding"],
+                               "Total Holding (new week)":totalholding2["Total Holding"]})
+        compared["Total Holding (old week)"]=pd.to_numeric(compared["Total Holding (old week)"],errors="coerce")
+        compared["Total Holding (new week)"]=pd.to_numeric(compared["Total Holding (new week)"],errors="coerce")
+        compared["Difference"]= compared["Total Holding (new week)"]-compared["Total Holding (old week)"] 
         
-        # status=[]
-        # for _, row in compared.iterrows():
-        #     old = row["Total Holding (old week)"]
-        #     new = row["Total Holding (new week)"]
-        #     if old == 0 and new > 0:
-        #         status.append("Newly Bought")
-        #     elif old > 0 and new == 0:
-        #         status.append("Fully Sold")
-        #     elif old != new:
-        #         status.append("Quantity Changed")
-        #     else:
-        #         status.append("") 
+        status=[]
+        for _, row in compared.iterrows():
+            old = row["Total Holding (old week)"]
+            new = row["Total Holding (new week)"]
+            if old == 0 and new > 0:
+                status.append("Newly Bought")
+            elif old > 0 and new == 0:
+                status.append("Fully Sold")
+            elif old != new:
+                status.append("Quantity Changed")
+            else:
+                status.append("") 
 
-        # compared["Status"] = status
+        compared["Status"] = status
 
-        # mismatches=compared[compared["Difference"]!=0]
+        mismatches=compared[compared["Difference"]!=0]
         
         if mismatches.empty:
             st.success("NO MISMATCHES DETECTED")
