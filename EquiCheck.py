@@ -38,10 +38,28 @@ if file1 and file2:
                                "Scrip Name":totalholding1["Scrip Name"],
                                "Total Holding (old week)":totalholding1["Total Holding"],
                                "Total Holding (new week)":totalholding2["Total Holding"]})
+        compared = pd.merge(totalholding1, totalholding2, on="ScripCode", how="outer")
+        compared["Scrip Name"] = compared["Scrip Name_old"].combine_first(compared["Scrip Name_new"])
+        compared = compared.drop(columns=["Scrip Name_x", "Scrip Name_y"])
         compared["Total Holding (old week)"]=pd.to_numeric(compared["Total Holding (old week)"],errors="coerce")
         compared["Total Holding (new week)"]=pd.to_numeric(compared["Total Holding (new week)"],errors="coerce")
         compared["Difference"]= compared["Total Holding (new week)"]-compared["Total Holding (old week)"] 
-        # compared=compared.drop(index=62)
+        
+        status=[]
+        for _, row in compared.iterrows():
+            old = row["Total Holding (old week)"]
+            new = row["Total Holding (new week)"]
+            if old == 0 and new > 0:
+                status.append(" Newly Bought")
+            elif old > 0 and new == 0:
+                status.append(" Fully Sold")
+            elif old != new:
+                status.append(" Quantity Changed")
+            else:
+                status.append("") 
+
+        compared["Status"] = status
+
         mismatches=compared[compared["Difference"]!=0]
         if mismatches.empty:
             st.success("NO MISMATCHES DETECTED")
