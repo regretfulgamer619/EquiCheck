@@ -31,8 +31,19 @@ def file_cleaner(file):
 
 if file1 and file2:
     try:
-        totalholding1= file_cleaner(file1)
-        totalholding2= file_cleaner(file2)
+        totalholding1= file_cleaner(file1).copy()
+        totalholding2= file_cleaner(file2).copy()
+         if totalholding1.shape > totalholding2.shape:
+            for index, row in totalholding1.iterrows():
+                 code = row["ScripCode"]
+                 if code not in totalholding2["ScripCode"].values:
+                     totalholding2.loc[index] = { code, row["Scrip Name"],0 }
+
+        elif totalholding2.shape> totalholding1.shape:
+            for index, row in totalholding2.iterrows():
+                 code = row["ScripCode"]
+                 if code not in totalholding1["Scrip Name"].values:
+                     totalholding1.loc[index]={ code,row["Scrip Name"],0}
         
         compared=pd.DataFrame({"ScripCode":totalholding1["ScripCode"],
                                "Scrip Name":totalholding1["Scrip Name"],
@@ -40,10 +51,6 @@ if file1 and file2:
                                "Total Holding (new week)":totalholding2["Total Holding"]})
         compared["Total Holding (old week)"]=pd.to_numeric(compared["Total Holding (old week)"],errors="coerce")
         compared["Total Holding (new week)"]=pd.to_numeric(compared["Total Holding (new week)"],errors="coerce")
-        # compared = pd.merge(totalholding1, totalholding2, on="ScripCode", how="outer",suffixes="_old","_new")
-        # compared["Scrip Name"] = compared["Scrip Name_old"].combine_first(compared["Scrip Name_new"])
-        # compared = compared.drop(columns=["Scrip Name_old", "Scrip Name_new"])
-
         compared["Difference"]= compared["Total Holding (new week)"]-compared["Total Holding (old week)"] 
         
         status=[]
