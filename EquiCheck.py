@@ -38,7 +38,7 @@ if file1 and file2:
                                "Scrip Name":totalholding1["Scrip Name"],
                                "Total Holding (old week)":totalholding1["Total Holding"],
                                "Total Holding (new week)":totalholding2["Total Holding"]})
-        compared = pd.merge(totalholding1, totalholding2, on="ScripCode", how="outer")
+        # compared = pd.merge(totalholding1, totalholding2, on="ScripCode", how="outer")
         # compared["Scrip Name"] = compared["Scrip Name_old"].combine_first(compared["Scrip Name_new"])
         # compared = compared.drop(columns=["Scrip Name_old", "Scrip Name_new"])
         compared["Total Holding (old week)"]=pd.to_numeric(compared["Total Holding (old week)"],errors="coerce")
