@@ -31,33 +31,6 @@ def file_cleaner(file):
 
 if file1 and file2:
     try:
-              # Clean both files
-#         totalholding1 = file_cleaner(file1)
-#         totalholding2 = file_cleaner(file2)
-
-# # Convert Total Holding to numeric
-#         totalholding1["Total Holding"] = pd.to_numeric(totalholding1["Total Holding"], errors="coerce")
-#         totalholding2["Total Holding"] = pd.to_numeric(totalholding2["Total Holding"], errors="coerce")
-
-# # Merge on ScripCode with outer join to include all stocks from both
-#         compared = pd.merge(
-#                 totalholding1[["ScripCode", "Scrip Name", "Total Holding"]].rename(columns={"Total Holding": "Total Holding (old week)"}),
-#                 totalholding2[["ScripCode", "Scrip Name", "Total Holding"]].rename(columns={"Total Holding": "Total Holding (new week)"}),on="ScripCode",how="outer",suffixes=("_old", "_new") )
-
-# # Fill missing values (NaN) with 0 — meaning stock was bought new or sold off completely
-#         compared["Total Holding (old week)"] = compared["Total Holding (old week)"].fillna(0)
-#         compared["Total Holding (new week)"] = compared["Total Holding (new week)"].fillna(0)
-
-# # Prefer non-null Scrip Name
-#         compared["Scrip Name"] = compared["Scrip Name_old"].combine_first(compared["Scrip Name_new"])
-#         compared = compared.drop(columns=["Scrip Name_old", "Scrip Name_new"])
-
-# # Calculate difference
-#         compared["Difference"] = compared["Total Holding (new week)"] - compared["Total Holding (old week)"]
-
-# # Filter mismatches
-#         mismatches = compared[compared["Difference"] != 0]
-
         totalholding1= file_cleaner(file1).copy()
         totalholding2= file_cleaner(file2).copy()
         if totalholding1.shape > totalholding2.shape:
@@ -90,7 +63,7 @@ if file1 and file2:
             if old == 0 and new > 0:
                 status.append("Newly Bought")
             elif old > 0 and new == 0:
-                status.append("Fully Sold")
+                status.append("Sold Entirely")
             elif old != new:
                 status.append("Quantity Changed")
             else:
