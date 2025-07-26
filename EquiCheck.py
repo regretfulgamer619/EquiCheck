@@ -40,7 +40,7 @@ if file1 and file2:
                                "Total Holding (new week)":totalholding2["Total Holding"]})
         compared = pd.merge(totalholding1, totalholding2, on="ScripCode", how="outer")
         compared["Scrip Name"] = compared["Scrip Name_old"].combine_first(compared["Scrip Name_new"])
-        compared = compared.drop(columns=["Scrip Name_x", "Scrip Name_y"])
+        compared = compared.drop(columns=["Scrip Name_old", "Scrip Name_new"])
         compared["Total Holding (old week)"]=pd.to_numeric(compared["Total Holding (old week)"],errors="coerce")
         compared["Total Holding (new week)"]=pd.to_numeric(compared["Total Holding (new week)"],errors="coerce")
         compared["Difference"]= compared["Total Holding (new week)"]-compared["Total Holding (old week)"] 
