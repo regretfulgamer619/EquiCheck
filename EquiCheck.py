@@ -63,15 +63,15 @@ if file1 and file2:
         if totalholding1.shape > totalholding2.shape:
             for _, row in totalholding1.iterrows():
                  code = row["ScripCode"]
-                 if code not in totalholding2["Scrip Name"].values:
+                 if code not in totalholding2["ScripCode"].values:
                      totalholding2 = pd.concat([totalholding2, pd.DataFrame([{"ScripCode": code,"Scrip Name": row["Scrip Name"],"Total Holding": 0 }])], ignore_index=False)
 
 
         elif totalholding2.shape> totalholding1.shape:
             for _, row in totalholding2.iterrows():
                  code = row["ScripCode"]
-                 if code not in totalholding1["Scrip Name"].values:
-                     totalholding1 = pd.concat([totalholding1, pd.DataFrame([{"ScripCode": code,["Scrip Name"]:row["Scrip Name"],"Total Holding": 0}])],ignore_index=False)
+                 if code not in totalholding1["ScripCode"].values:
+                     totalholding1 = pd.concat([totalholding1, pd.DataFrame([{"ScripCode": code,"Scrip Name":row["Scrip Name"],"Total Holding": 0}])],ignore_index=False)
         totalholding1= totalholding1.sort_values(by="ScripCode").reset_index(drop=True)
         totalholding2= totalholding2.sort_values(by="ScripCode").reset_index(drop=True)
         
