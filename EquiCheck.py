@@ -42,7 +42,7 @@ if file1 and file2:
 # Merge on ScripCode with outer join to include all stocks from both
         compared = pd.merge(
                 totalholding1[["ScripCode", "Scrip Name", "Total Holding"]].rename(columns={"Total Holding": "Total Holding (old week)"}),
-                totalholding2[["ScripCode", "Scrip Name", "Total Holding"]].rename(columns={"Total Holding": "Total Holding (new week)"}),on="ScripCode",ow="outer",suffixes=("_old", "_new") )
+                totalholding2[["ScripCode", "Scrip Name", "Total Holding"]].rename(columns={"Total Holding": "Total Holding (new week)"}),on="ScripCode",how="outer",suffixes=("_old", "_new") )
 
 # Fill missing values (NaN) with 0 — meaning stock was bought new or sold off completely
         compared["Total Holding (old week)"] = compared["Total Holding (old week)"].fillna(0)
