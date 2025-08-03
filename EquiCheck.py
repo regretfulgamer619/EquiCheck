@@ -64,7 +64,7 @@ if file1 and file2:
         totalholding1 = fill_missing(totalholding1, totalholding2)
         totalholding2 = fill_missing(totalholding2, totalholding1)
 
-        totalholding1= totlaholding1.sort_values(by="Scrip Name").reset_index(drop=True)
+        totalholding1= totalholding1.sort_values(by="Scrip Name").reset_index(drop=True)
         totalholding2= totalholding2.sort_values(by="Scrip Name").reset_index(drop=True)
         
         compared=pd.DataFrame({"ScripCode":totalholding1["ScripCode"],
