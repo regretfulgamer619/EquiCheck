@@ -44,7 +44,7 @@ if file1 and file2:
             additions=[]
             for stock in missing_stocks:
                 name=df2.loc[df2["ScripCode"]==stock, "Scrip Name"].values
-                name= name[0] if len(name) else ""
+                name= name[0] if len(name)>0 else ""
                 additions.append({"ScripCode":stock,"Scrip Name":name,"Total Holding":0})
             return pd.concat([df1, pd.DataFrame(additions)], ignore_index=True) 
             
