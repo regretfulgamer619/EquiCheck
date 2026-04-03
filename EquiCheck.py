@@ -51,8 +51,8 @@ if file1 and file2:
         totalholding1= editor(totalholding1,totalholding2)
         totalholding2= editor(totalholding2,totalholding1)
 
-        totalholding1= totalholding1.sort_values(by="Scrip Name").reset_index(drop=True)
-        totalholding2= totalholding2.sort_values(by="Scrip Name").reset_index(drop=True)
+        totalholding1 = totalholding1.sort_values(by="ScripCode").reset_index(drop=True)
+        totalholding2 = totalholding2.sort_values(by="ScripCode").reset_index(drop=True)
         
         compared=pd.DataFrame({"ScripCode":totalholding1["ScripCode"],
                                "Scrip Name":totalholding1["Scrip Name"],
