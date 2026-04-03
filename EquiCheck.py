@@ -37,7 +37,7 @@ if file1 and file2:
     try:
         totalholding1= file_cleaner(file1).copy()
         totalholding2= file_cleaner(file2).copy()
-        all_scrips = pd.unique(pd.concat([totalholding1["ScripCode"], totalholding2["ScripCode"]]))
+        all_stocks = pd.unique(pd.concat([totalholding1["ScripCode"], totalholding2["ScripCode"]]))
         all_stocks.sort()
         def editor(df1,df2):
             missing_stocks= set(all_stocks)-set(df1["ScripCode"])
